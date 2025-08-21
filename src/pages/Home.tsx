@@ -47,9 +47,14 @@ const Home: React.FC = () => {
 
 
         {/* Main Title */}
-        <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-12 leading-tight" style={{color: '#FFFFFF'}}>
+        <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight" style={{color: '#FFFFFF'}}>
           欢迎来到悠一的世界
         </h1>
+        
+        {/* Subtitle */}
+        <p className="text-lg md:text-xl text-gray-400 mb-12">
+          Full-Stack & Visionary Dreamer
+        </p>
 
        
       </div>

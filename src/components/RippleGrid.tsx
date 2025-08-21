@@ -119,10 +119,10 @@ void main() {
         
         // Enhanced grid shaking effect
         float shakeFreq = 12.0;
-        float shakeAmp = 0.025;
+        float shakeAmp = 0.005;
         
         // Stronger influence calculation
-        influence = influence * influence * 2.0;
+        influence = influence * 0.5;
         
         // Create directional shaking for grid lines
         vec2 shakeOffset = vec2(

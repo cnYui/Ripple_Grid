@@ -12,7 +12,7 @@ const Home: React.FC = () => {
         <RippleGrid
           enableRainbow={false}
           gridColor="#6366f1"
-          rippleIntensity={0.05}
+          rippleIntensity={0.02}
           gridSize={10}
           gridThickness={15}
           fadeDistance={1.5}
@@ -21,7 +21,7 @@ const Home: React.FC = () => {
           opacity={1}
           gridRotation={0}
           mouseInteraction={true}
-          mouseInteractionRadius={1.5}
+          mouseInteractionRadius={0.5}
         />
       </div>
 

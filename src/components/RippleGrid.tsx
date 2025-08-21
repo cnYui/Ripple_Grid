@@ -112,12 +112,27 @@ void main() {
     if (mouseInteraction && mouseInfluence > 0.0) {
         vec2 mouseUv = (mousePosition * 2.0 - 1.0);
         mouseUv.x *= iResolution.x / iResolution.y;
-        float mouseDist = length(uv - mouseUv);
+        vec2 mouseOffset = uv - mouseUv;
+        float mouseDist = length(mouseOffset);
         
         float influence = mouseInfluence * exp(-mouseDist * mouseDist / (mouseInteractionRadius * mouseInteractionRadius));
         
-        float mouseWave = sin(pi * (iTime * 2.0 - mouseDist * 3.0)) * influence;
-        rippleUv += normalize(uv - mouseUv) * mouseWave * rippleIntensity * 0.3;
+        // Enhanced grid shaking effect
+        float shakeFreq = 8.0;
+        float shakeAmp = 0.15;
+        
+        // Create directional shaking for grid lines
+        vec2 shakeOffset = vec2(
+            sin(iTime * shakeFreq + mouseOffset.x * 10.0) * influence * shakeAmp,
+            cos(iTime * shakeFreq + mouseOffset.y * 10.0) * influence * shakeAmp
+        );
+        
+        // Add radial wave effect
+        float mouseWave = sin(pi * (iTime * 3.0 - mouseDist * 5.0)) * influence * 0.8;
+        vec2 radialOffset = normalize(mouseOffset) * mouseWave * rippleIntensity * 0.5;
+        
+        // Combine shaking and radial effects
+        rippleUv += shakeOffset + radialOffset;
     }
 
     vec2 a = sin(gridSize * 0.5 * pi * rippleUv - pi / 2.0);

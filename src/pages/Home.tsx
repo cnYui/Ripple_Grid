@@ -21,12 +21,12 @@ const Home: React.FC = () => {
           opacity={1}
           gridRotation={0}
           mouseInteraction={true}
-          mouseInteractionRadius={0.8}
+          mouseInteractionRadius={1.5}
         />
       </div>
 
       {/* Navigation */}
-      <nav className="relative z-10 flex items-center justify-between p-6">
+      <nav className="relative z-10 flex items-center justify-between p-6" style={{pointerEvents: 'none'}}>
         <div className="flex items-center space-x-2">
           <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center">
             <div className="w-4 h-4 bg-gray-900 rounded-full"></div>
@@ -34,17 +34,17 @@ const Home: React.FC = () => {
           <span className="text-white text-lg font-semibold">React Bits</span>
         </div>
         <div className="flex items-center space-x-8">
-          <a href="#" className="text-white hover:text-gray-300 transition-colors">
+          <a href="#" className="text-white hover:text-gray-300 transition-colors" style={{pointerEvents: 'auto'}}>
             Home
           </a>
-          <a href="#" className="text-white hover:text-gray-300 transition-colors">
+          <a href="#" className="text-white hover:text-gray-300 transition-colors" style={{pointerEvents: 'auto'}}>
             Docs
           </a>
         </div>
       </nav>
 
       {/* Main Content */}
-      <div className="relative z-10 flex flex-col items-center justify-center min-h-[calc(100vh-120px)] text-center px-6">
+      <div className="relative z-10 flex flex-col items-center justify-center min-h-[calc(100vh-120px)] text-center px-6" style={{pointerEvents: 'none'}}>
         {/* New Background Badge */}
         <div className="mb-8">
           <div className="inline-flex items-center px-4 py-2 bg-gray-800/50 border border-gray-700 rounded-full text-sm text-gray-300">
@@ -64,10 +64,10 @@ const Home: React.FC = () => {
 
         {/* Buttons */}
         <div className="flex flex-col sm:flex-row gap-4">
-          <button className="px-8 py-3 bg-white text-gray-900 rounded-full font-semibold hover:bg-gray-100 transition-colors">
+          <button className="px-8 py-3 bg-white text-gray-900 rounded-full font-semibold hover:bg-gray-100 transition-colors" style={{pointerEvents: 'auto'}}>
             Get Started
           </button>
-          <button className="px-8 py-3 bg-transparent border border-gray-600 text-white rounded-full font-semibold hover:bg-gray-800 transition-colors">
+          <button className="px-8 py-3 bg-transparent border border-gray-600 text-white rounded-full font-semibold hover:bg-gray-800 transition-colors" style={{pointerEvents: 'auto'}}>
             Learn More
           </button>
         </div>
@@ -82,6 +82,7 @@ const Home: React.FC = () => {
             className={`w-12 h-6 rounded-full transition-colors ${
               showDemo ? 'bg-blue-500' : 'bg-gray-600'
             } relative`}
+            style={{pointerEvents: 'auto'}}
           >
             <div
               className={`w-5 h-5 bg-white rounded-full absolute top-0.5 transition-transform ${

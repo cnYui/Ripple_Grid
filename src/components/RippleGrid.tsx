@@ -118,18 +118,21 @@ void main() {
         float influence = mouseInfluence * exp(-mouseDist * mouseDist / (mouseInteractionRadius * mouseInteractionRadius));
         
         // Enhanced grid shaking effect
-        float shakeFreq = 8.0;
-        float shakeAmp = 0.15;
+        float shakeFreq = 12.0;
+        float shakeAmp = 0.025;
+        
+        // Stronger influence calculation
+        influence = influence * influence * 2.0;
         
         // Create directional shaking for grid lines
         vec2 shakeOffset = vec2(
-            sin(iTime * shakeFreq + mouseOffset.x * 10.0) * influence * shakeAmp,
-            cos(iTime * shakeFreq + mouseOffset.y * 10.0) * influence * shakeAmp
+            sin(iTime * shakeFreq + mouseOffset.x * 15.0) * influence * shakeAmp,
+            cos(iTime * shakeFreq + mouseOffset.y * 15.0) * influence * shakeAmp
         );
         
         // Add radial wave effect
-        float mouseWave = sin(pi * (iTime * 3.0 - mouseDist * 5.0)) * influence * 0.8;
-        vec2 radialOffset = normalize(mouseOffset) * mouseWave * rippleIntensity * 0.5;
+        float mouseWave = sin(pi * (iTime * 4.0 - mouseDist * 8.0)) * influence * 1.2;
+        vec2 radialOffset = normalize(mouseOffset) * mouseWave * rippleIntensity * 0.8;
         
         // Combine shaking and radial effects
         rippleUv += shakeOffset + radialOffset;
@@ -228,17 +231,19 @@ void main() {
     };
 
     window.addEventListener("resize", resize);
-    if (mouseInteraction) {
+    resize();
+    
+    // Add mouse event listeners after resize to ensure container has proper dimensions
+    if (mouseInteraction && containerRef.current) {
       containerRef.current.addEventListener("mousemove", handleMouseMove);
       containerRef.current.addEventListener("mouseenter", handleMouseEnter);
       containerRef.current.addEventListener("mouseleave", handleMouseLeave);
     }
-    resize();
 
     const render = (t: number) => {
       uniforms.iTime.value = t * 0.001;
 
-      const lerpFactor = 0.1;
+      const lerpFactor = 0.15;
       mousePositionRef.current.x +=
         (targetMouseRef.current.x - mousePositionRef.current.x) * lerpFactor;
       mousePositionRef.current.y +=
@@ -247,7 +252,7 @@ void main() {
       const currentInfluence = uniforms.mouseInfluence.value;
       const targetInfluence = mouseInfluenceRef.current;
       uniforms.mouseInfluence.value +=
-        (targetInfluence - currentInfluence) * 0.05;
+        (targetInfluence - currentInfluence) * 0.3;
 
       uniforms.mousePosition.value = [
         mousePositionRef.current.x,

@@ -173,7 +173,28 @@ void main() {
             pow(cos(iTime), 4.0)
         ) + 0.5;
     } else {
-        t = gridColor;
+        // Auto color gradient cycling effect
+        float colorTime = iTime * 0.3; // Slow color transition
+        vec3 color1 = vec3(0.2, 0.4, 1.0);  // Blue
+        vec3 color2 = vec3(1.0, 0.3, 0.8);  // Pink
+        vec3 color3 = vec3(0.3, 1.0, 0.5);  // Green
+        vec3 color4 = vec3(1.0, 0.8, 0.2);  // Orange
+        
+        // Create smooth cycling between 4 colors
+        float phase = mod(colorTime, 4.0);
+        vec3 currentColor;
+        
+        if (phase < 1.0) {
+            currentColor = mix(color1, color2, phase);
+        } else if (phase < 2.0) {
+            currentColor = mix(color2, color3, phase - 1.0);
+        } else if (phase < 3.0) {
+            currentColor = mix(color3, color4, phase - 2.0);
+        } else {
+            currentColor = mix(color4, color1, phase - 3.0);
+        }
+        
+        t = currentColor;
     }
 
     float finalFade = ddd * vignette;

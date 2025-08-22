@@ -1,4 +1,4 @@
-Circular Gallery
+相关参数：
 Props
 Property	Type	Default	Description
 items
@@ -49,10 +49,6 @@ import CircularGallery from './CircularGallery'
   <CircularGallery bend={3} textColor="#ffffff" borderRadius={0.05} scrollEase={0.02}/>
 </div>
 code
-Default
-
-Tailwind
-
 import { Camera, Mesh, Plane, Program, Renderer, Texture, Transform } from "ogl";
 import { useEffect, useRef } from "react";
 
@@ -528,6 +524,7 @@ export default function CircularGallery({
   }, [items, bend, textColor, borderRadius, font, scrollSpeed, scrollEase]);
   return <div className="circular-gallery" ref={containerRef} />;
 }
+
 CSS
 .circular-gallery {
   width: 100%;

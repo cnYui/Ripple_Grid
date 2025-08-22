@@ -72,14 +72,27 @@ body {
 .main-content {
   flex: 1;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
-  padding: 100px 20px 50px;
+  padding: 0;
+  min-height: 100vh;
 }
 
 .hero-section {
   text-align: center;
-  max-width: 600px;
+  max-width: 100%;
+  width: 100%;
+  height: 100vh;
+  position: relative;
+}
+
+/* FallingText 组件样式 */
+.combined-text {
+  height: 100vh;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 .hero-badge {
@@ -97,11 +110,19 @@ body {
   font-size: clamp(2.5rem, 5vw, 4rem);
   font-weight: 700;
   line-height: 1.2;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
   background: linear-gradient(135deg, #ffffff 0%, #a0a0a0 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+}
+
+.hero-subtitle {
+  font-size: 1.2rem;
+  font-weight: 400;
+  color: #888888;
+  margin-bottom: 40px;
+  opacity: 0.8;
 }
 
 .hero-buttons {
@@ -162,6 +183,30 @@ body {
   height: 8px;
   background: #4169e1;
   border-radius: 50%;
+}
+
+/* Dock组件样式调整 */
+.dock-item svg {
+  color: #ffffff;
+  opacity: 0.8;
+  transition: opacity 0.2s;
+}
+
+.dock-item:hover svg {
+  opacity: 1;
+}
+
+.dock-item:focus {
+  outline: 2px solid #2080ff;
+  outline-offset: 2px;
+}
+
+/* 确保Dock组件在页面底部正确显示 */
+.app {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 /* 响应式设计 */

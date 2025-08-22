@@ -21,14 +21,14 @@ const TechBlog = () => {
         top: '2rem',
         left: '50%',
         transform: 'translateX(-50%)',
-        width: '300px',
+        width: '200px',
         height: '80px',
         zIndex: 20
       }}>
         <TextPressure
           text="TECH"
           textColor="#FFFFFF"
-          minFontSize={48}
+          minFontSize={36}
           width={true}
           weight={true}
           italic={true}

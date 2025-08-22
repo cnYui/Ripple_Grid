@@ -21,7 +21,7 @@ const MusicRecommend = () => {
         top: '2rem',
         left: '50%',
         transform: 'translateX(-50%)',
-        width: '300px',
+        width: '250px',
         height: '80px',
         zIndex: 20
       }}>

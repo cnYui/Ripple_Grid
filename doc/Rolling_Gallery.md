@@ -1,3 +1,6 @@
+Rolling Gallery
+
+相关参数和依赖：
 Props
 Property	Type	Default	Description
 autoplay
@@ -12,6 +15,11 @@ boolean
 false
 Allows the carousel to be paused on hover when autoplay is turned on.
 
+Dependencies
+motion
+Created withby
+
+代码：
 installation
 npm install motion
 usage

@@ -1,5 +1,6 @@
 import React from 'react';
 import TextPressure from '../components/TextPressure';
+import ProfileCard from '../components/ProfileCard';
 
 const TechBlog = () => {
   return (
@@ -44,9 +45,31 @@ const TechBlog = () => {
         flex: 1,
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        padding: '2rem'
       }}>
-        {/* 页面内容暂时留空，后续补充 */}
+        {/* ProfileCard 包装容器 */}
+        <div style={{
+          width: '450px',
+          height: '550px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center'
+        }}>
+          <ProfileCard
+            name="Full-Stack & Visionary Dreamer"
+            handle="techdev"
+            status="Coding"
+            contactText="Contact Me"
+            avatarUrl="/主题.png"
+            iconUrl="https://trae-api-sg.mchost.guru/api/ide/v1/text_to_image?prompt=tech%20icon%20pattern%20geometric%20circuit%20board%20design%20minimalist%20blue%20glow&image_size=square"
+            showUserInfo={true}
+            showBehindGradient={true}
+            enableTilt={true}
+            enableMobileTilt={true}
+            onContactClick={() => console.log('Contact clicked')}
+          />
+        </div>
       </div>
     </div>
   );

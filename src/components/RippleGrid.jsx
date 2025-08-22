@@ -2,21 +2,6 @@ import { useRef, useEffect } from "react";
 import { Renderer, Program, Triangle, Mesh } from "ogl";
 import "./RippleGrid.css";
 
-interface RippleGridProps {
-  enableRainbow?: boolean;
-  gridColor?: string;
-  rippleIntensity?: number;
-  gridSize?: number;
-  gridThickness?: number;
-  fadeDistance?: number;
-  vignetteStrength?: number;
-  glowIntensity?: number;
-  opacity?: number;
-  gridRotation?: number;
-  mouseInteraction?: boolean;
-  mouseInteractionRadius?: number;
-}
-
 const RippleGrid = ({
   enableRainbow = false,
   gridColor = "#ffffff",
@@ -30,24 +15,24 @@ const RippleGrid = ({
   gridRotation = 0,
   mouseInteraction = true,
   mouseInteractionRadius = 1,
-}: RippleGridProps) => {
-  const containerRef = useRef<HTMLDivElement>(null);
+}) => {
+  const containerRef = useRef(null);
   const mousePositionRef = useRef({ x: 0.5, y: 0.5 });
   const targetMouseRef = useRef({ x: 0.5, y: 0.5 });
   const mouseInfluenceRef = useRef(0);
-  const uniformsRef = useRef<any>(null);
+  const uniformsRef = useRef(null);
 
   useEffect(() => {
     if (!containerRef.current) return;
 
-    const hexToRgb = (hex: string) => {
+    const hexToRgb = (hex) => {
       const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
       return result
         ? [
-            parseInt(result[1], 16) / 255,
-            parseInt(result[2], 16) / 255,
-            parseInt(result[3], 16) / 255,
-          ]
+          parseInt(result[1], 16) / 255,
+          parseInt(result[2], 16) / 255,
+          parseInt(result[3], 16) / 255,
+        ]
         : [1, 1, 1];
     };
 
@@ -112,30 +97,12 @@ void main() {
     if (mouseInteraction && mouseInfluence > 0.0) {
         vec2 mouseUv = (mousePosition * 2.0 - 1.0);
         mouseUv.x *= iResolution.x / iResolution.y;
-        vec2 mouseOffset = uv - mouseUv;
-        float mouseDist = length(mouseOffset);
+        float mouseDist = length(uv - mouseUv);
         
         float influence = mouseInfluence * exp(-mouseDist * mouseDist / (mouseInteractionRadius * mouseInteractionRadius));
         
-        // Enhanced grid shaking effect
-        float shakeFreq = 12.0;
-        float shakeAmp = 0.005;
-        
-        // Stronger influence calculation
-        influence = influence * 0.5;
-        
-        // Create directional shaking for grid lines
-        vec2 shakeOffset = vec2(
-            sin(iTime * shakeFreq + mouseOffset.x * 15.0) * influence * shakeAmp,
-            cos(iTime * shakeFreq + mouseOffset.y * 15.0) * influence * shakeAmp
-        );
-        
-        // Add radial wave effect
-        float mouseWave = sin(pi * (iTime * 4.0 - mouseDist * 8.0)) * influence * 1.2;
-        vec2 radialOffset = normalize(mouseOffset) * mouseWave * rippleIntensity * 0.8;
-        
-        // Combine shaking and radial effects
-        rippleUv += shakeOffset + radialOffset;
+        float mouseWave = sin(pi * (iTime * 2.0 - mouseDist * 3.0)) * influence;
+        rippleUv += normalize(uv - mouseUv) * mouseWave * rippleIntensity * 0.3;
     }
 
     vec2 a = sin(gridSize * 0.5 * pi * rippleUv - pi / 2.0);
@@ -173,28 +140,7 @@ void main() {
             pow(cos(iTime), 4.0)
         ) + 0.5;
     } else {
-        // Auto color gradient cycling effect
-        float colorTime = iTime * 0.3; // Slow color transition
-        vec3 color1 = vec3(0.2, 0.4, 1.0);  // Blue
-        vec3 color2 = vec3(1.0, 0.3, 0.8);  // Pink
-        vec3 color3 = vec3(0.3, 1.0, 0.5);  // Green
-        vec3 color4 = vec3(1.0, 0.8, 0.2);  // Orange
-        
-        // Create smooth cycling between 4 colors
-        float phase = mod(colorTime, 4.0);
-        vec3 currentColor;
-        
-        if (phase < 1.0) {
-            currentColor = mix(color1, color2, phase);
-        } else if (phase < 2.0) {
-            currentColor = mix(color2, color3, phase - 1.0);
-        } else if (phase < 3.0) {
-            currentColor = mix(color3, color4, phase - 2.0);
-        } else {
-            currentColor = mix(color4, color1, phase - 3.0);
-        }
-        
-        t = currentColor;
+        t = gridColor;
     }
 
     float finalFade = ddd * vignette;
@@ -228,12 +174,12 @@ void main() {
     const mesh = new Mesh(gl, { geometry, program });
 
     const resize = () => {
-      const { clientWidth: w, clientHeight: h } = containerRef.current!;
+      const { clientWidth: w, clientHeight: h } = containerRef.current;
       renderer.setSize(w, h);
       uniforms.iResolution.value = [w, h];
     };
 
-    const handleMouseMove = (e: MouseEvent) => {
+    const handleMouseMove = (e) => {
       if (!mouseInteraction || !containerRef.current) return;
       const rect = containerRef.current.getBoundingClientRect();
       const x = (e.clientX - rect.left) / rect.width;
@@ -252,19 +198,17 @@ void main() {
     };
 
     window.addEventListener("resize", resize);
-    resize();
-    
-    // Add mouse event listeners after resize to ensure container has proper dimensions
-    if (mouseInteraction && containerRef.current) {
+    if (mouseInteraction) {
       containerRef.current.addEventListener("mousemove", handleMouseMove);
       containerRef.current.addEventListener("mouseenter", handleMouseEnter);
       containerRef.current.addEventListener("mouseleave", handleMouseLeave);
     }
+    resize();
 
-    const render = (t: number) => {
+    const render = (t) => {
       uniforms.iTime.value = t * 0.001;
 
-      const lerpFactor = 0.15;
+      const lerpFactor = 0.1;
       mousePositionRef.current.x +=
         (targetMouseRef.current.x - mousePositionRef.current.x) * lerpFactor;
       mousePositionRef.current.y +=
@@ -273,7 +217,7 @@ void main() {
       const currentInfluence = uniforms.mouseInfluence.value;
       const targetInfluence = mouseInfluenceRef.current;
       uniforms.mouseInfluence.value +=
-        (targetInfluence - currentInfluence) * 0.3;
+        (targetInfluence - currentInfluence) * 0.05;
 
       uniforms.mousePosition.value = [
         mousePositionRef.current.x,
@@ -300,7 +244,7 @@ void main() {
         );
       }
       renderer.gl.getExtension("WEBGL_lose_context")?.loseContext();
-      if (containerRef.current && gl.canvas.parentNode) {
+      if (containerRef.current && gl.canvas) {
         containerRef.current.removeChild(gl.canvas);
       }
     };
@@ -309,14 +253,14 @@ void main() {
   useEffect(() => {
     if (!uniformsRef.current) return;
 
-    const hexToRgb = (hex: string) => {
+    const hexToRgb = (hex) => {
       const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
       return result
         ? [
-            parseInt(result[1], 16) / 255,
-            parseInt(result[2], 16) / 255,
-            parseInt(result[3], 16) / 255,
-          ]
+          parseInt(result[1], 16) / 255,
+          parseInt(result[2], 16) / 255,
+          parseInt(result[3], 16) / 255,
+        ]
         : [1, 1, 1];
     };
 

@@ -52,7 +52,7 @@ const MusicRecommend = () => {
       }}>
         {/* ChromaGrid 音乐组件 */}
         <div style={{
-          height: '1600px',
+          height: '2400px',
           width: '100%',
           position: 'relative'
         }}>
@@ -63,221 +63,222 @@ const MusicRecommend = () => {
                 title: "The Dreamer",
                 subtitle: "方大同",
                 handle: "@khalil",
-                url: "https://music.163.com/",
-                borderColor: "border-blue-500",
-                gradient: "from-blue-400 to-purple-600"
+                location: "方大同",
+
+                borderColor: "#3B82F6",
+                gradient: "linear-gradient(145deg, #3B82F6, #000)"
               },
               {
                 image: "/images/music_pic/截屏2025-08-23 14.32.33.png",
                 title: "400 metres",
                 subtitle: "Chinese Football",
                 handle: "@chinesefootball",
-                url: "https://music.163.com/",
-                borderColor: "border-purple-500",
-                gradient: "from-purple-400 to-pink-600"
+                location: "Chinese Football",
+                borderColor: "#8B5CF6",
+                gradient: "linear-gradient(210deg, #8B5CF6, #000)"
               },
               {
                 image: "/images/music_pic/截屏2025-08-23 14.33.50.png",
                 title: "电动少女",
                 subtitle: "Chinese Football",
                 handle: "@chinesefootball",
-                url: "https://music.163.com/",
-                borderColor: "border-green-500",
-                gradient: "from-green-400 to-blue-600"
+                location: "Chinese Football",
+                borderColor: "#10B981",
+                gradient: "linear-gradient(165deg, #10B981, #000)"
               },
               {
                 image: "/images/music_pic/截屏2025-08-23 14.34.24.png",
                 title: "嗵嗵",
                 subtitle: "DUODUO",
                 handle: "@duoduo",
-                url: "https://music.163.com/",
-                borderColor: "border-yellow-500",
-                gradient: "from-yellow-400 to-orange-600"
+                location: "DUODUO",
+                borderColor: "#F59E0B",
+                gradient: "linear-gradient(195deg, #F59E0B, #000)"
               },
               {
                 image: "/images/music_pic/截屏2025-08-23 14.34.50.png",
                 title: "Finger",
                 subtitle: "大象体操",
                 handle: "@elephantgym",
-                url: "https://music.163.com/",
-                borderColor: "border-red-500",
-                gradient: "from-red-400 to-purple-600"
+                location: "大象体操",
+                borderColor: "#EF4444",
+                gradient: "linear-gradient(225deg, #EF4444, #000)"
               },
               {
                 image: "/images/music_pic/截屏2025-08-23 14.35.19.png",
                 title: "地球上最后一个emo男孩",
                 subtitle: "失去爱情的摩托车手",
                 handle: "@emobiker",
-                url: "https://music.163.com/",
-                borderColor: "border-emerald-500",
-                gradient: "from-emerald-400 to-teal-600"
+                location: "失去爱情的摩托车手",
+                borderColor: "#06B6D4",
+                gradient: "linear-gradient(135deg, #06B6D4, #000)"
               },
               {
                 image: "/images/music_pic/截屏2025-08-23 14.37.41.png",
                 title: "cream soda",
                 subtitle: "Supercar",
                 handle: "@supercar",
-                url: "https://music.163.com/",
-                borderColor: "border-cyan-500",
-                gradient: "from-cyan-400 to-blue-600"
+                location: "Supercar",
+                borderColor: "#06B6D4",
+                gradient: "linear-gradient(180deg, #06B6D4, #000)"
               },
               {
                 image: "/images/music_pic/截屏2025-08-23 14.38.46.png",
                 title: "My Instincts Are the Enemy",
                 subtitle: "American Football",
                 handle: "@americanfootball",
-                url: "https://music.163.com/",
-                borderColor: "border-indigo-500",
-                gradient: "from-indigo-400 to-purple-600"
+                location: "American Football",
+                borderColor: "#4F46E5",
+                gradient: "linear-gradient(150deg, #4F46E5, #000)"
               },
               {
                 image: "/images/music_pic/截屏2025-08-23 14.39.09.png",
                 title: "Episode 33",
                 subtitle: "She Her Her Hers",
                 handle: "@sheherherhers",
-                url: "https://music.163.com/",
-                borderColor: "border-pink-500",
-                gradient: "from-pink-400 to-rose-600"
+                location: "She Her Her Hers",
+                borderColor: "#EC4899",
+                gradient: "linear-gradient(170deg, #EC4899, #000)"
               },
               {
                 image: "/images/music_pic/截屏2025-08-23 14.39.42.png",
                 title: "манго нектар",
                 subtitle: "Corn Wave",
                 handle: "@cornwave",
-                url: "https://music.163.com/",
-                borderColor: "border-orange-500",
-                gradient: "from-orange-400 to-red-600"
+                location: "Corn Wave",
+                borderColor: "#F97316",
+                gradient: "linear-gradient(190deg, #F97316, #000)"
               },
               {
                 image: "/images/music_pic/截屏2025-08-23 14.40.14.png",
                 title: "Cloud Dwellers",
                 subtitle: "you you you all the same",
                 handle: "@clouddwellers",
-                url: "https://music.163.com/",
-                borderColor: "border-teal-500",
-                gradient: "from-teal-400 to-green-600"
+                location: "you you you all the same",
+                borderColor: "#14B8A6",
+                gradient: "linear-gradient(200deg, #14B8A6, #000)"
               },
               {
                 image: "/images/music_pic/截屏2025-08-23 14.40.37.png",
                 title: "an association game+1",
                 subtitle: "how to count one to ten",
                 handle: "@howtocount",
-                url: "https://music.163.com/",
-                borderColor: "border-lime-500",
-                gradient: "from-lime-400 to-green-600"
+                location: "how to count one to ten",
+                borderColor: "#84CC16",
+                gradient: "linear-gradient(220deg, #84CC16, #000)"
               },
               {
                 image: "/images/music_pic/截屏2025-08-23 14.41.05.png",
                 title: "past and language",
                 subtitle: "toe",
                 handle: "@toeband",
-                url: "https://music.163.com/",
-                borderColor: "border-violet-500",
-                gradient: "from-violet-400 to-purple-600"
+                location: "toe",
+                borderColor: "#8B5CF6",
+                gradient: "linear-gradient(240deg, #8B5CF6, #000)"
               },
               {
                 image: "/images/music_pic/截屏2025-08-23 14.41.39.png",
                 title: "two moon",
                 subtitle: "toe",
                 handle: "@toeband",
-                url: "https://music.163.com/",
-                borderColor: "border-sky-500",
-                gradient: "from-sky-400 to-blue-600"
+                location: "toe",
+                borderColor: "#0EA5E9",
+                gradient: "linear-gradient(260deg, #0EA5E9, #000)"
               },
               {
                 image: "/images/music_pic/截屏2025-08-23 14.42.02.png",
                 title: "you go",
                 subtitle: "toe",
                 handle: "@toeband",
-                url: "https://music.163.com/",
-                borderColor: "border-rose-500",
-                gradient: "from-rose-400 to-pink-600"
+                location: "toe",
+                borderColor: "#F43F5E",
+                gradient: "linear-gradient(280deg, #F43F5E, #000)"
               },
               {
                 image: "/images/music_pic/截屏2025-08-23 14.42.38.png",
                 title: "Midnight City",
                 subtitle: "M83",
                 handle: "@m83official",
-                url: "https://music.163.com/",
-                borderColor: "border-amber-500",
-                gradient: "from-amber-400 to-orange-600"
+                location: "M83",
+                borderColor: "#F59E0B",
+                gradient: "linear-gradient(300deg, #F59E0B, #000)"
               },
               {
                 image: "/images/music_pic/截屏2025-08-23 14.43.11.png",
                 title: "Holocene",
                 subtitle: "Bon Iver",
                 handle: "@boniver",
-                url: "https://music.163.com/",
-                borderColor: "border-slate-500",
-                gradient: "from-slate-400 to-gray-600"
+                location: "Bon Iver",
+                borderColor: "#64748B",
+                gradient: "linear-gradient(320deg, #64748B, #000)"
               },
               {
                 image: "/images/music_pic/截屏2025-08-23 14.43.41.png",
                 title: "Flightless Bird",
                 subtitle: "Iron & Wine",
                 handle: "@ironandwine",
-                url: "https://music.163.com/",
-                borderColor: "border-stone-500",
-                gradient: "from-stone-400 to-neutral-600"
+                location: "Iron & Wine",
+                borderColor: "#78716C",
+                gradient: "linear-gradient(340deg, #78716C, #000)"
               },
               {
                 image: "/images/music_pic/截屏2025-08-23 14.44.28.png",
                 title: "Svefn-g-englar",
                 subtitle: "Sigur Rós",
                 handle: "@sigurros",
-                url: "https://music.163.com/",
-                borderColor: "border-zinc-500",
-                gradient: "from-zinc-400 to-slate-600"
+                location: "Sigur Rós",
+                borderColor: "#71717A",
+                gradient: "linear-gradient(360deg, #71717A, #000)"
               },
               {
                 image: "/images/music_pic/截屏2025-08-23 14.45.29.png",
                 title: "Weightless",
                 subtitle: "Marconi Union",
                 handle: "@marconiunion",
-                url: "https://music.163.com/",
-                borderColor: "border-neutral-500",
-                gradient: "from-neutral-400 to-gray-600"
+                location: "Marconi Union",
+                borderColor: "#737373",
+                gradient: "linear-gradient(30deg, #737373, #000)"
               },
               {
                 image: "/images/music_pic/截屏2025-08-23 14.46.02.png",
                 title: "Aqueous Transmission",
                 subtitle: "Incubus",
                 handle: "@incubus",
-                url: "https://music.163.com/",
-                borderColor: "border-gray-500",
-                gradient: "from-gray-400 to-zinc-600"
+                location: "Incubus",
+                borderColor: "#6B7280",
+                gradient: "linear-gradient(60deg, #6B7280, #000)"
               },
               {
                 image: "/images/music_pic/截屏2025-08-23 14.46.32.png",
                 title: "Porcelain",
                 subtitle: "Moby",
                 handle: "@moby",
-                url: "https://music.163.com/",
-                borderColor: "border-blue-400",
-                gradient: "from-blue-300 to-indigo-500"
+                location: "Moby",
+                borderColor: "#60A5FA",
+                gradient: "linear-gradient(90deg, #60A5FA, #000)"
               },
               {
                 image: "/images/music_pic/截屏2025-08-23 14.47.15.png",
                 title: "Teardrop",
                 subtitle: "Massive Attack",
                 handle: "@massiveattack",
-                url: "https://music.163.com/",
-                borderColor: "border-purple-400",
-                gradient: "from-purple-300 to-violet-500"
+                location: "Massive Attack",
+                borderColor: "#C084FC",
+                gradient: "linear-gradient(120deg, #C084FC, #000)"
               },
               {
                 image: "/images/music_pic/截屏2025-08-23 14.47.41.png",
                 title: "Mad World",
                 subtitle: "Gary Jules",
                 handle: "@garyjules",
-                url: "https://music.163.com/",
-                borderColor: "border-green-400",
-                gradient: "from-green-300 to-emerald-500"
+                location: "Gary Jules",
+                borderColor: "#4ADE80",
+                gradient: "linear-gradient(150deg, #4ADE80, #000)"
               }
             ]}
             columns={3}
             rows={8}
-            radius={300}
+            radius={150}
             damping={0.45}
             fadeOut={0.6}
             ease="power3.out"

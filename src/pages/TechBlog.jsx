@@ -83,7 +83,7 @@ const TechBlog = () => {
         alignItems: 'flex-start',
         justifyContent: 'center',
         padding: '2rem 4rem 2rem 2rem',
-        paddingTop: '16rem',
+        paddingTop: '40rem',
         paddingBottom: '4rem',
         overflowY: 'auto'
       }}>

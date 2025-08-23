@@ -1,5 +1,6 @@
 import React from 'react';
 import TextPressure from '../components/TextPressure';
+import RollingGallery from '../components/RollingGallery';
 
 const AnimeRecommend = () => {
   return (
@@ -46,7 +47,7 @@ const AnimeRecommend = () => {
         alignItems: 'center',
         justifyContent: 'center'
       }}>
-        {/* 页面内容暂时留空，后续补充 */}
+        <RollingGallery autoplay={true} pauseOnHover={true} speed={0.15} />
       </div>
     </div>
   );

@@ -71,7 +71,10 @@ const FallingText = ({
       const isHighlighted = highlightWords.some((hw) => wordObj.text.includes(hw));
       const typeClass = wordObj.type === 'english' ? 'english-word' : 'chinese-word';
       const positionClass = wordObj.position === 'subtitle' ? 'subtitle-word' : 'title-word';
-      return `<span class="word ${typeClass} ${positionClass} ${isHighlighted ? highlightClass : ""}">${wordObj.text}</span>`;
+      // 为特定字符添加蓝色样式类
+      const isBlueWord = ['欢', '迎', '悠', '一'].includes(wordObj.text);
+      const blueClass = isBlueWord ? 'blue-word' : '';
+      return `<span class="word ${typeClass} ${positionClass} ${blueClass} ${isHighlighted ? highlightClass : ""}">${wordObj.text}</span>`;
     };
     
     const titleHTML = titleWords.map(createWordSpan).join(" ");

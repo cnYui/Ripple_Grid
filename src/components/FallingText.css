@@ -69,6 +69,11 @@
   text-shadow: 0 0 15px rgba(0, 255, 255, 0.8);
 }
 
+.blue-word {
+  color: #22FFFF !important;
+  text-shadow: 0 0 10px rgba(34, 255, 255, 0.5) !important;
+}
+
 .falling-text-canvas {
   position: absolute;
   top: 0;

@@ -24,6 +24,7 @@ export const ChromaGrid = ({
       title: "Alex Rivera",
       subtitle: "Full Stack Developer",
       handle: "@alexrivera",
+      location: "San Francisco, CA",
       borderColor: "#4F46E5",
       gradient: "linear-gradient(145deg, #4F46E5, #000)",
       url: "https://github.com/",
@@ -33,6 +34,7 @@ export const ChromaGrid = ({
       title: "Jordan Chen",
       subtitle: "DevOps Engineer",
       handle: "@jordanchen",
+      location: "Seattle, WA",
       borderColor: "#10B981",
       gradient: "linear-gradient(210deg, #10B981, #000)",
       url: "https://linkedin.com/in/",
@@ -42,6 +44,7 @@ export const ChromaGrid = ({
       title: "Morgan Blake",
       subtitle: "UI/UX Designer",
       handle: "@morganblake",
+      location: "New York, NY",
       borderColor: "#F59E0B",
       gradient: "linear-gradient(165deg, #F59E0B, #000)",
       url: "https://dribbble.com/",
@@ -51,6 +54,7 @@ export const ChromaGrid = ({
       title: "Casey Park",
       subtitle: "Data Scientist",
       handle: "@caseypark",
+      location: "Austin, TX",
       borderColor: "#EF4444",
       gradient: "linear-gradient(195deg, #EF4444, #000)",
       url: "https://kaggle.com/",
@@ -60,6 +64,7 @@ export const ChromaGrid = ({
       title: "Sam Kim",
       subtitle: "Mobile Developer",
       handle: "@thesamkim",
+      location: "Los Angeles, CA",
       borderColor: "#8B5CF6",
       gradient: "linear-gradient(225deg, #8B5CF6, #000)",
       url: "https://github.com/",
@@ -69,6 +74,7 @@ export const ChromaGrid = ({
       title: "Tyler Rodriguez",
       subtitle: "Cloud Architect",
       handle: "@tylerrod",
+      location: "Denver, CO",
       borderColor: "#06B6D4",
       gradient: "linear-gradient(135deg, #06B6D4, #000)",
       url: "https://aws.amazon.com/",
@@ -83,8 +89,7 @@ export const ChromaGrid = ({
     setY.current = gsap.quickSetter(el, "--y", "px");
     const { width, height } = el.getBoundingClientRect();
     pos.current = { x: width / 2, y: height / 2 };
-    setX.current(pos.current.x);
-    setY.current(pos.current.y);
+    // 不在初始化时设置CSS变量，避免立即触发蒙版效果
   }, []);
 
   const moveTo = (x, y) => {
@@ -161,7 +166,6 @@ export const ChromaGrid = ({
             <h3 className="name">{c.title}</h3>
             {c.handle && <span className="handle">{c.handle}</span>}
             <p className="role">{c.subtitle}</p>
-            {c.location && <span className="location">{c.location}</span>}
           </footer>
         </article>
       ))}

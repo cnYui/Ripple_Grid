@@ -10,21 +10,17 @@ const TechBlog = () => {
       minHeight: '100vh',
       width: '100%',
       position: 'relative',
-      display: 'flex',
-      flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'flex-start',
       color: '#ffffff'
     }}>
       {/* TECH 文字标题 */}
       <div style={{
-        position: 'absolute',
+        position: 'fixed',
         top: '2rem',
         left: '50%',
         transform: 'translateX(-50%)',
         width: '200px',
         height: '80px',
-        zIndex: 20
+        zIndex: 999
       }}>
         <TextPressure
           text="TECH"
@@ -42,6 +38,9 @@ const TechBlog = () => {
       
       {/* 左侧 ProfileCard 区域 */}
       <div style={{
+        position: 'fixed',
+        left: 0,
+        top: 0,
         width: '40%',
         minWidth: '450px',
         height: '100vh',
@@ -49,7 +48,8 @@ const TechBlog = () => {
         alignItems: 'center',
         justifyContent: 'center',
         padding: '2rem',
-        paddingTop: '8rem'
+        paddingTop: '8rem',
+        zIndex: 10
       }}>
         <div style={{
           width: '450px',
@@ -76,13 +76,16 @@ const TechBlog = () => {
 
       {/* ScrollReveal组件区域 */}
       <div style={{
+        marginLeft: '40%',
         width: '60%',
-        height: '100vh',
+        minHeight: '100vh',
         display: 'flex',
-        alignItems: 'center',
+        alignItems: 'flex-start',
         justifyContent: 'center',
         padding: '2rem 4rem 2rem 2rem',
-        paddingTop: '16rem'
+        paddingTop: '16rem',
+        paddingBottom: '4rem',
+        overflowY: 'auto'
       }}>
         <div style={{
           maxWidth: '800px',

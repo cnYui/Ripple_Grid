@@ -6,7 +6,7 @@
 }
 
 .dock-panel {
-  position: absolute;
+  position: fixed;
   bottom: 4rem;
   left: 50%;
   transform: translateX(-50%);

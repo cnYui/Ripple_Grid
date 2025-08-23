@@ -8,6 +8,7 @@
   font-size: 1.5rem;
 }
 
-.word {
-  display: inline-block;
+.line {
+  display: block;
+  margin-bottom: 0.2em;
 }

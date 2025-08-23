@@ -44,7 +44,7 @@ const RollingGallery = ({ autoplay = false, pauseOnHover = false, images = [], s
 
   const cylinderWidth = isScreenSizeSm ? 2200 : 4000;
   const faceCount = images.length;
-  const faceWidth = (cylinderWidth / faceCount) * 0.6;
+  const faceWidth = (cylinderWidth / faceCount) * 0.2;
   const radius = cylinderWidth / (2 * Math.PI);
   
   // 计算1:1拖动对应的拖动因子

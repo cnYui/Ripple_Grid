@@ -1,10 +1,11 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import './ScrollReveal.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
+// 完全重写的ScrollReveal组件，使用React方式处理子元素
 const ScrollReveal = ({
   children,
   scrollContainerRef,
@@ -18,79 +19,178 @@ const ScrollReveal = ({
   wordAnimationEnd = 'bottom bottom'
 }) => {
   const containerRef = useRef(null);
-  const textRef = useRef(null);
-
-  useEffect(() => {
-    const container = containerRef.current;
-    const textElement = textRef.current;
-    
-    if (!container || !textElement) return;
-
-    // Function to recursively process text nodes and wrap words
-    const processTextNodes = (element) => {
-      const walker = document.createTreeWalker(
-        element,
-        NodeFilter.SHOW_TEXT,
-        null,
-        false
-      );
+  const linesRef = useRef([]);
+  
+  // 将子元素分割成行
+  const renderChildrenAsLines = () => {
+    // 如果children是字符串，按行分割
+    if (typeof children === 'string') {
+      // 尝试按句子分割
+      const sentences = children.split(/(?<=[。！？.!?]+)/).filter(s => s.trim());
       
-      const textNodes = [];
-      let node;
-      while (node = walker.nextNode()) {
-        if (node.textContent.trim()) {
-          textNodes.push(node);
-        }
+      if (sentences.length > 1) {
+        return sentences.map((sentence, index) => (
+          <div 
+            key={`line-${index}`}
+            ref={el => { if (el) linesRef.current[index] = el; }}
+            className="scroll-reveal-line"
+            style={{
+              display: 'block',
+              marginBottom: '0.3em',
+              opacity: baseOpacity,
+              filter: enableBlur ? `blur(${blurStrength}px)` : 'none'
+            }}
+          >
+            {sentence.trim()}
+          </div>
+        ));
       }
       
-      textNodes.forEach(textNode => {
-        const text = textNode.textContent;
-        const words = text.split(/\s+/).filter(word => word.length > 0);
+      // 如果没有句子，按逗号分割
+      const phrases = children.split(/(?<=[，,；;]+)/).filter(p => p.trim());
+      if (phrases.length > 1) {
+        return phrases.map((phrase, index) => (
+          <div 
+            key={`line-${index}`}
+            ref={el => { if (el) linesRef.current[index] = el; }}
+            className="scroll-reveal-line"
+            style={{
+              display: 'block',
+              marginBottom: '0.3em',
+              opacity: baseOpacity,
+              filter: enableBlur ? `blur(${blurStrength}px)` : 'none'
+            }}
+          >
+            {phrase.trim()}
+          </div>
+        ));
+      }
+      
+      // 如果还是一行，按空格分割成几组
+      const words = children.split(/\s+/).filter(w => w.trim());
+      if (words.length > 8) {
+        const wordsPerLine = Math.max(5, Math.ceil(words.length / 3));
+        const lines = [];
         
-        if (words.length > 1) {
-          const fragment = document.createDocumentFragment();
-          
-          words.forEach((word, index) => {
-            const span = document.createElement('span');
-            span.className = 'word';
-            span.style.opacity = baseOpacity;
-            if (enableBlur) {
-              span.style.filter = `blur(${blurStrength}px)`;
-            }
-            span.textContent = word;
-            fragment.appendChild(span);
-            
-            // Add space between words (except for the last word)
-            if (index < words.length - 1) {
-              fragment.appendChild(document.createTextNode(' '));
-            }
-          });
-          
-          textNode.parentNode.replaceChild(fragment, textNode);
-        } else if (words.length === 1) {
-          // Single word, wrap it
-          const span = document.createElement('span');
-          span.className = 'word';
-          span.style.opacity = baseOpacity;
-          if (enableBlur) {
-            span.style.filter = `blur(${blurStrength}px)`;
+        for (let i = 0; i < words.length; i += wordsPerLine) {
+          const lineWords = words.slice(i, i + wordsPerLine);
+          if (lineWords.length > 0) {
+            lines.push(lineWords.join(' '));
           }
-          span.textContent = words[0];
-          textNode.parentNode.replaceChild(span, textNode);
         }
+        
+        return lines.map((line, index) => (
+          <div 
+            key={`line-${index}`}
+            ref={el => { if (el) linesRef.current[index] = el; }}
+            className="scroll-reveal-line"
+            style={{
+              display: 'block',
+              marginBottom: '0.3em',
+              opacity: baseOpacity,
+              filter: enableBlur ? `blur(${blurStrength}px)` : 'none'
+            }}
+          >
+            {line}
+          </div>
+        ));
+      }
+      
+      // 如果是短文本，整体作为一行
+      return (
+        <div 
+          ref={el => { if (el) linesRef.current[0] = el; }}
+          className="scroll-reveal-line"
+          style={{
+            display: 'block',
+            marginBottom: '0.3em',
+            opacity: baseOpacity,
+            filter: enableBlur ? `blur(${blurStrength}px)` : 'none'
+          }}
+        >
+          {children}
+        </div>
+      );
+    }
+    
+    // 如果children是React元素，保留其结构
+    if (React.isValidElement(children)) {
+      // 如果是单个元素，包装它
+      return (
+        <div 
+          ref={el => { if (el) linesRef.current[0] = el; }}
+          className="scroll-reveal-line"
+          style={{
+            display: 'block',
+            marginBottom: '0.3em',
+            opacity: baseOpacity,
+            filter: enableBlur ? `blur(${blurStrength}px)` : 'none'
+          }}
+        >
+          {children}
+        </div>
+      );
+    }
+    
+    // 如果children是数组，处理每个子元素
+    if (Array.isArray(children)) {
+      return children.map((child, index) => {
+        if (typeof child === 'string') {
+          // 文本节点按行分割
+          const lines = child.split(/\n/).filter(line => line.trim());
+          if (lines.length > 1) {
+            return lines.map((line, lineIndex) => (
+              <div 
+                key={`line-${index}-${lineIndex}`}
+                ref={el => { if (el) linesRef.current.push(el); }}
+                className="scroll-reveal-line"
+                style={{
+                  display: 'block',
+                  marginBottom: '0.3em',
+                  opacity: baseOpacity,
+                  filter: enableBlur ? `blur(${blurStrength}px)` : 'none'
+                }}
+              >
+                {line.trim()}
+              </div>
+            ));
+          }
+        }
+        
+        // 其他元素保持原样
+        return (
+          <div 
+            key={`line-${index}`}
+            ref={el => { if (el) linesRef.current.push(el); }}
+            className="scroll-reveal-line"
+            style={{
+              display: 'block',
+              marginBottom: '0.3em',
+              opacity: baseOpacity,
+              filter: enableBlur ? `blur(${blurStrength}px)` : 'none'
+            }}
+          >
+            {child}
+          </div>
+        );
       });
-    };
+    }
+    
+    // 默认情况，直接返回children
+    return children;
+  };
 
-    // Process all text nodes in the element
-    processTextNodes(textElement);
+  // 设置动画效果
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
     
-    // Get all word elements
-    const wordElements = textElement.querySelectorAll('.word');
+    console.log('ScrollReveal lines count:', linesRef.current.length);
     
-    // Set initial container rotation
+    // 设置容器初始旋转
     gsap.set(container, { rotation: baseRotation });
     
-    // Container rotation animation
+    // 容器旋转动画
     gsap.to(container, {
       rotation: 0,
       scrollTrigger: {
@@ -98,30 +198,45 @@ const ScrollReveal = ({
         start: 'top bottom',
         end: rotationEnd,
         scrub: true,
-        scroller: scrollContainerRef?.current || window
+        scroller: scrollContainerRef?.current || window,
+        onEnter: () => console.log('Container animation entered')
       }
     });
     
-    // Word animations
-    wordElements.forEach((word, index) => {
-      gsap.to(word, {
+    // 为每一行设置动画
+    linesRef.current.forEach((line, index) => {
+      if (!line) return;
+      
+      console.log(`Setting up animation for line ${index}`);
+      
+      // 创建行动画
+      gsap.to(line, {
         opacity: 1,
-        filter: enableBlur ? 'blur(0px)' : 'none',
+        filter: 'blur(0px)',
         scrollTrigger: {
-          trigger: word,
-          start: 'top bottom',
-          end: wordAnimationEnd,
-          scrub: true,
-          scroller: scrollContainerRef?.current || window
+          trigger: line,
+          start: 'top 85%', // 当行到达视口85%位置时开始
+          end: 'bottom 15%', // 当行底部到达视口15%位置时结束
+          scrub: 0.5, // 平滑过渡
+          scroller: scrollContainerRef?.current || window,
+          onEnter: () => console.log(`Line ${index} animation entered`),
+          onUpdate: (self) => {
+            // 根据进度动态调整模糊强度
+            const currentBlur = blurStrength * (1 - self.progress);
+            line.style.filter = enableBlur ? `blur(${currentBlur}px)` : 'none';
+            if (self.progress > 0 && self.progress < 1) {
+              console.log(`Line ${index} progress: ${self.progress.toFixed(2)}, blur: ${currentBlur.toFixed(1)}px`);
+            }
+          }
         }
       });
     });
     
-    // Cleanup function
+    // 清理函数
     return () => {
       ScrollTrigger.getAll().forEach(trigger => {
-        if (trigger.trigger === container || 
-            Array.from(wordElements).includes(trigger.trigger)) {
+        if (trigger.vars.trigger === container || 
+            linesRef.current.includes(trigger.vars.trigger)) {
           trigger.kill();
         }
       });
@@ -132,12 +247,10 @@ const ScrollReveal = ({
     <div 
       ref={containerRef} 
       className={`scroll-reveal ${containerClassName}`}
+      data-testid="scroll-reveal-container"
     >
-      <div 
-        ref={textRef} 
-        className={`scroll-reveal-text ${textClassName}`}
-      >
-        {children}
+      <div className={`scroll-reveal-text ${textClassName}`}>
+        {renderChildrenAsLines()}
       </div>
     </div>
   );

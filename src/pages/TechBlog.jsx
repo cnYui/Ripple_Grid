@@ -11,9 +11,9 @@ const TechBlog = () => {
       position: 'relative',
       overflow: 'hidden',
       display: 'flex',
-      flexDirection: 'column',
+      flexDirection: 'row',
       alignItems: 'center',
-      justifyContent: 'center',
+      justifyContent: 'flex-start',
       color: '#ffffff'
     }}>
       {/* TECH 文字标题 */}
@@ -40,15 +40,16 @@ const TechBlog = () => {
         />
       </div>
       
-      {/* 页面内容区域 */}
+      {/* 左侧 ProfileCard 区域 */}
       <div style={{
-        flex: 1,
+        width: '40%',
+        minWidth: '450px',
+        height: '100vh',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
         padding: '2rem'
       }}>
-        {/* ProfileCard 包装容器 */}
         <div style={{
           width: '450px',
           height: '550px',
@@ -69,6 +70,34 @@ const TechBlog = () => {
             enableMobileTilt={true}
             onContactClick={() => console.log('Contact clicked')}
           />
+        </div>
+      </div>
+
+      {/* 右侧文本内容区域 */}
+      <div style={{
+        width: '60%',
+        height: '100vh',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '2rem 4rem 2rem 2rem'
+      }}>
+        <div style={{
+          maxWidth: '600px',
+          width: '100%',
+          textAlign: 'left'
+        }}>
+          <p style={{
+            fontSize: '22px',
+            lineHeight: '1.8',
+            color: '#ffffff',
+            margin: 0,
+            fontFamily: 'system-ui, -apple-system, sans-serif',
+            letterSpacing: '0.5px',
+            opacity: 0.9
+          }}>
+            技术博客内容将在此展示，这里将包含最新的技术文章、开发心得、项目经验分享以及前沿技术探索。我们致力于为开发者提供有价值的技术内容，帮助大家在技术成长路上不断进步。
+          </p>
         </div>
       </div>
     </div>

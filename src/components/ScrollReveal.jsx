@@ -26,16 +26,63 @@ const ScrollReveal = ({
     
     if (!container || !textElement) return;
 
-    // Split text into words
-    const text = typeof children === 'string' ? children : textElement.textContent;
-    const words = text.split(' ');
-    
-    // Create word spans
-    const wordSpans = words.map((word, index) => {
-      return `<span class="word" style="opacity: ${baseOpacity}; ${enableBlur ? `filter: blur(${blurStrength}px);` : ''}">${word}</span>`;
-    }).join(' ');
-    
-    textElement.innerHTML = wordSpans;
+    // Function to recursively process text nodes and wrap words
+    const processTextNodes = (element) => {
+      const walker = document.createTreeWalker(
+        element,
+        NodeFilter.SHOW_TEXT,
+        null,
+        false
+      );
+      
+      const textNodes = [];
+      let node;
+      while (node = walker.nextNode()) {
+        if (node.textContent.trim()) {
+          textNodes.push(node);
+        }
+      }
+      
+      textNodes.forEach(textNode => {
+        const text = textNode.textContent;
+        const words = text.split(/\s+/).filter(word => word.length > 0);
+        
+        if (words.length > 1) {
+          const fragment = document.createDocumentFragment();
+          
+          words.forEach((word, index) => {
+            const span = document.createElement('span');
+            span.className = 'word';
+            span.style.opacity = baseOpacity;
+            if (enableBlur) {
+              span.style.filter = `blur(${blurStrength}px)`;
+            }
+            span.textContent = word;
+            fragment.appendChild(span);
+            
+            // Add space between words (except for the last word)
+            if (index < words.length - 1) {
+              fragment.appendChild(document.createTextNode(' '));
+            }
+          });
+          
+          textNode.parentNode.replaceChild(fragment, textNode);
+        } else if (words.length === 1) {
+          // Single word, wrap it
+          const span = document.createElement('span');
+          span.className = 'word';
+          span.style.opacity = baseOpacity;
+          if (enableBlur) {
+            span.style.filter = `blur(${blurStrength}px)`;
+          }
+          span.textContent = words[0];
+          textNode.parentNode.replaceChild(span, textNode);
+        }
+      });
+    };
+
+    // Process all text nodes in the element
+    processTextNodes(textElement);
     
     // Get all word elements
     const wordElements = textElement.querySelectorAll('.word');

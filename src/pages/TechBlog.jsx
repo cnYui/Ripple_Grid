@@ -96,12 +96,12 @@ const TechBlog = () => {
           <div style={{ marginBottom: '1.5rem' }}>
             <ScrollReveal
               enableBlur={true}
-              baseOpacity={0.1}
-              baseRotation={3}
-              blurStrength={4}
+              baseOpacity={0.2}
+              baseRotation={6}
+              blurStrength={3}
               textClassName="text-white/90"
             >
-              <div style={{ fontSize: '6rem', lineHeight: '1.2', color: '#e8e8e8' }}>
+              <div style={{ lineHeight: '1.2', color: '#e8e8e8' }}>
                 我是一名充满激情的技术开发者，专注于前端开发与人工智能应用的深度融合。在这个数字化的世界里，我致力于通过代码创造美好的用户体验，分享技术探索的心得与生活中的感悟。
               </div>
             </ScrollReveal>
@@ -110,12 +110,12 @@ const TechBlog = () => {
           <div style={{ marginBottom: '2rem' }}>
             <ScrollReveal
               enableBlur={true}
-              baseOpacity={0.1}
-              baseRotation={3}
-              blurStrength={4}
+              baseOpacity={0.2}
+              baseRotation={6}
+              blurStrength={3}
               textClassName="text-white/90"
             >
-              <div style={{ fontSize: '6rem', lineHeight: '1.2', color: '#e8e8e8' }}>
+              <div style={{ lineHeight: '1.2', color: '#e8e8e8' }}>
                 对新兴技术保持着永不熄灭的好奇心，我喜欢动手实践，从绚丽的3D可视化到智能的AI应用，不断挑战自己的技术边界。每一次技术突破都是对未知领域的勇敢探索，每一行代码都承载着对完美的不懈追求。
               </div>
             </ScrollReveal>
@@ -124,12 +124,12 @@ const TechBlog = () => {
           <div style={{ marginBottom: '2rem' }}>
             <ScrollReveal
               enableBlur={true}
-              baseOpacity={0.1}
-              baseRotation={3}
-              blurStrength={4}
+              baseOpacity={0.2}
+              baseRotation={6}
+              blurStrength={3}
               textClassName="text-white/90"
             >
-              <div style={{ fontSize: '6rem', lineHeight: '1.2', color: '#d0d0d0' }}>
+              <div style={{ lineHeight: '1.2', color: '#d0d0d0' }}>
                 <div style={{ marginBottom: '1.5rem' }}>
                   <strong style={{ color: '#4ecdc4' }}>前端开发：</strong>React、Vue.js、TypeScript、Vite —— 构建现代化的用户界面
                 </div>
@@ -152,12 +152,12 @@ const TechBlog = () => {
           <div style={{ marginBottom: '0.5rem' }}>
             <ScrollReveal
               enableBlur={true}
-              baseOpacity={0.1}
-              baseRotation={3}
-              blurStrength={4}
+              baseOpacity={0.2}
+              baseRotation={6}
+              blurStrength={3}
               textClassName="text-white/90"
             >
-              <div style={{ fontSize: '6rem', lineHeight: '1.2', color: '#e8e8e8' }}>
+              <div style={{ lineHeight: '1.2', color: '#e8e8e8' }}>
                 目前正在深入探索Web3、区块链技术和智能合约等前沿领域，相信这些技术将重新定义数字世界的未来。在技术的海洋中，我始终保持学习的热情，与时代同步前行。
               </div>
             </ScrollReveal>
